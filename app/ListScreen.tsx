@@ -11,13 +11,14 @@ import {
   ListRenderItem,
 } from 'react-native';
 import { Swipeable } from 'react-native-gesture-handler';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface Item {
   id: string;
   title: string;
 }
 
-const initialData: Item[] = [
+const initialData: Item[] = [ 
   { id: '1', title: 'Item 1' },
   { id: '2', title: 'Item 2' },
   { id: '3', title: 'Item 3' },
@@ -78,17 +79,19 @@ const ListScreen: React.FC = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={data}
-        keyExtractor={(item) => item.id}
-        renderItem={renderItem}
-        ItemSeparatorComponent={() => <View style={styles.separator} />}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
-        }
-      />
-    </View>
+    <SafeAreaView>
+      <View style={styles.container}>
+        <FlatList
+          data={data}
+          keyExtractor={(item) => item.id}
+          renderItem={renderItem}
+          ItemSeparatorComponent={() => <View style={styles.separator} />}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
+          }
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 
